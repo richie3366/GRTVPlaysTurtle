@@ -1,0 +1,6 @@
+{
+  "port": 4321,
+  "turtle key": "secret",
+  "encryption key": "secret",
+  "commands": ["turnLeft", "turnRight", "forward", "back", "up", "down"]
+}

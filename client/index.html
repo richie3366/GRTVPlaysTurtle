@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>GRTV plays Turtle</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="command-form">
+      <input id="turtle-name" type="text" placeholder="Turtle Name" />
+      <input id="turtle-command" type="text" placeholder="Command" />
+      <button id="send-command">Send</button>
+    </div>
+    
+    <pre id="log"></pre>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script src="client.js"></script>
+  </body>
+</html>

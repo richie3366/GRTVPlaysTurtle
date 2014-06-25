@@ -11,5 +11,8 @@
   "bugs": {
     "url": "https://github.com/richie3366/GRTVPlaysTurtle/issues"
   },
-  "homepage": "https://github.com/richie3366/GRTVPlaysTurtle"
+  "homepage": "https://github.com/richie3366/GRTVPlaysTurtle",
+  "dependencies": {
+    "socket.io": "^0.9.17"
+  }
 }
