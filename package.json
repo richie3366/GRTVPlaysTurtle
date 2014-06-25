@@ -1,0 +1,15 @@
+{
+  "name": "GRTVPlaysTurtle",
+  "version": "0.0.1",
+  "description": "#YOLO",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/richie3366/GRTVPlaysTurtle.git"
+  },
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/richie3366/GRTVPlaysTurtle/issues"
+  },
+  "homepage": "https://github.com/richie3366/GRTVPlaysTurtle"
+}
