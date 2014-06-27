@@ -34,6 +34,18 @@ body {
   background-color: #455a64;
 }
 
+#map {
+  height: 920px;
+  width: 920px;
+  background-color: #EEE;
+  position: relative;
+}
+
+#map .map-turtle {
+  background-color: #444;
+  position: absolute;
+}
+
 .col-half {
   width: 50%;
   float: left;

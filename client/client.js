@@ -7,12 +7,19 @@ var commandInput = document.querySelector("#turtle-command"),
     turtlesList = {},
     turtleView = document.querySelector("#turtle-view"),
     logElem = document.querySelector("#log .content"),
+    map = document.querySelector("#map"),
     selectedTurtle = "",
     socket = io.connect("/control", {
       host: "sandhose.fr",
       port: 4321
     });
 
+var mapBoundaries = {
+  minX: -630,
+  maxX: -400,
+  minZ: 200,
+  maxZ: 430
+};
 
 function sendCommand(command) {
   if(socket.socket.connected) {
@@ -48,6 +55,24 @@ function updateTurtles() {
   var d = "";
   if(turtlesList[selectedTurtle]) { d = JSON.stringify(turtlesList[selectedTurtle].data, null, "  "); }
   turtleView.querySelector(".content").innerHTML = d;
+  updateMap();
+}
+
+function updateMap() {
+  map.innerHTML = "";
+  var mapRect = map.getBoundingClientRect();
+  var elWidth = mapRect.width / (mapBoundaries.maxX - mapBoundaries.minX);
+  var elHeight = mapRect.height / (mapBoundaries.maxZ - mapBoundaries.minZ);
+  debugger;
+  for(var i in turtlesList) {
+    var e = document.createElement("div");
+    e.className = "map-turtle";
+    e.style.width = elWidth + "px";
+    e.style.height = elHeight + "px";
+    e.style.top = (turtlesList[i].data.location.z - mapBoundaries.minZ) * elHeight + "px";
+    e.style.left = (turtlesList[i].data.location.x - mapBoundaries.minX) * elWidth + "px";
+    map.appendChild(e);
+  }
 }
 
 function outputLog(message) {
