@@ -46,7 +46,21 @@ turtles.on("connection", function(socket) {
   socket.on("disconnect", function() {
     delete turtleList[turtleName];
     controllers.emit("turtle disconnected", { name: turtleName });
-  })
+  });
+
+  socket.on("infos", function(data) {
+    controllers.emit("infos", {
+      name: turtleName,
+      infos: data
+    });
+  });
+
+  socket.on("ent", function(data) {
+    controllers.emit("entities", {
+      name: turtleName,
+      entities: data
+    });
+  });
 });
 
 

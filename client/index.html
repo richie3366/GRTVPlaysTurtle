@@ -3,16 +3,35 @@
   <head>
     <title>GRTV plays Turtle</title>
     <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="command-form">
-      <input id="turtle-name" type="text" placeholder="Turtle Name" />
-      <input id="turtle-command" type="text" placeholder="Command" />
-      <button id="send-command">Send</button>
+    <div class="container" id="main">
+      <h1>GRTV plays Turtle</h1>
+      
+      <div class="col-half">
+        <div id="turtle-view" class="card z-1">
+          <h2>No Turtle selected</h2>
+          <pre class="content"></pre>
+          <div class="card-footer">
+            <input id="turtle-command" type="text" placeholder="Command" />
+            <button id="send-command" class="button">Send</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-half">
+        <div id="turtles" class="card z-1">
+          <h2>Turtle List</h2>
+          <div class="content">Loading</div>
+        </div>
+        <div id="log" class="card z-1">
+          <h2>Output log</h2>
+          <div class="content"></div>
+        </div>
+      </div>
     </div>
-    
-    <pre id="log"></pre>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script src="client.js"></script>
