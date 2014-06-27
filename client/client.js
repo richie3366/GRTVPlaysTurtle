@@ -2,6 +2,7 @@
 
 var commandInput = document.querySelector("#turtle-command"),
     sendCommandButton = document.querySelector("#send-command"),
+    instantCommand = document.querySelector("#instant-commands"),
     turtlesListElem = document.querySelector("#turtles .content"),
     turtlesList = {},
     turtleView = document.querySelector("#turtle-view"),
@@ -58,7 +59,7 @@ function outputLog(message) {
 
 sendCommandButton.addEventListener("click", function() {
   sendCommand(commandInput.value);
-});
+}, false);
 
 socket.on("error", function(data) {
   outputLog(data);
@@ -79,6 +80,16 @@ socket.on("turtles list", function(data) {
 
 socket.on("command list", function(data) {
   outputLog("Available commands: " + JSON.stringify(data) ); 
+  for(var i in data) {
+    var e = document.createElement("button");
+    e.className = "instant-command-button button";
+    e.innerHTML = data[i];
+    e.dataset.command = data[i];
+    e.addEventListener("click", function() {
+      sendCommand(e.dataset.command);
+    }, false);
+    instantCommand.appendChild(e);
+  }
 });
 
 socket.on("turtle connected", function(data) {
