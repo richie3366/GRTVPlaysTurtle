@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/richie3366/GRTVPlaysTurtle",
   "dependencies": {
+    "reactty": "0.0.16",
     "socket.io": "^0.9.17"
   }
 }

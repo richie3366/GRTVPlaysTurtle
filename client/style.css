@@ -14,9 +14,24 @@ body {
   font-size: 1.4rem;
 }
 
+#log {
+  background-color: #37474f;
+  color: #eceff1;
+}
+
 #log .content {
   font-family: monospace;
   word-break: break-all;
+}
+
+#log .content .line {
+  padding: 4px 16px;
+  margin: 0 -16px;
+  border-top: solid 1px #455a64;
+}
+
+#log .content .line:hover {
+  background-color: #455a64;
 }
 
 .col-half {
@@ -38,7 +53,6 @@ h1 {
   font-size: 4.8rem;
   line-height: 6rem;
   margin: 2rem 0;
-  color: #;
 }
 
 h2 {
@@ -51,7 +65,7 @@ h2 {
 .card {
   background-color: #fff;
   padding: 16px;
-  margin: 4px;
+  margin: 0 4px 8px 4px;
 }
 
 .container {

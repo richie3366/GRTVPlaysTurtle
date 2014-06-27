@@ -1,5 +1,6 @@
+"use strict";
+
 var commandInput = document.querySelector("#turtle-command"),
-    turtleNameInput = document.querySelector("#turtle-name"),
     sendCommandButton = document.querySelector("#send-command"),
     turtlesListElem = document.querySelector("#turtles .content"),
     turtlesList = {},
@@ -14,9 +15,9 @@ var commandInput = document.querySelector("#turtle-command"),
 
 function sendCommand(command) {
   if(socket.socket.connected) {
-    socket.emit("command", { 
+    socket.emit("command", {
       command: command,
-      name: selectedTurtle
+      id: selectedTurtle
     });
   }
   else {
@@ -26,18 +27,22 @@ function sendCommand(command) {
 
 function updateTurtles() {
   turtlesListElem.innerHTML = "";
-
-  for(var i in turtlesList)  {
-    if(selectedTurtle === i) {
-      turtlesList[i].elem.classList.add("selected");
+  if(Object.keys(turtlesList).length === 0) {
+    turtlesListElem.innerHTML = "No Turtle connected";
+  }
+  else {
+    for(var i in turtlesList)  {
+      if(selectedTurtle === turtlesList[i].data.id) {
+        turtlesList[i].elem.classList.add("selected");
+      }
+      else {
+        turtlesList[i].elem.classList.remove("selected");
+      }
+      turtlesListElem.appendChild(turtlesList[i].elem);
     }
-    else {
-      turtlesList[i].elem.classList.remove("selected");
-    }
-    turtlesListElem.appendChild(turtlesList[i].elem);
   }
 
-  turtleView.querySelector("h2").innerHTML = selectedTurtle || "No Turtle selected";
+  turtleView.querySelector("h2").innerHTML = turtlesList[selectedTurtle] ? turtlesList[selectedTurtle].data.name : "No Turtle selected";
 
   var d = "";
   if(turtlesList[selectedTurtle]) { d = JSON.stringify(turtlesList[selectedTurtle].data, null, "  "); }
@@ -63,10 +68,10 @@ socket.on("command", function(data) {
   outputLog("[" + data.turtle + "] " + data.command); 
 });
 
-socket.on("turtle list", function(data) {
+socket.on("turtles list", function(data) {
   outputLog("Turtle list: " + JSON.stringify(data)); 
   for(var i in data) {
-    turtlesList[data[i]] = new Turtle({ name: data[i], infos: { pos: {}}});
+    turtlesList[data[i].id] = new Turtle(data[i]);
   }
 
   updateTurtles();
@@ -77,29 +82,21 @@ socket.on("command list", function(data) {
 });
 
 socket.on("turtle connected", function(data) {
-  outputLog("Turtle connected! " + data.name); 
-  turtlesList[data.name] = new Turtle(data);
+  outputLog("Turtle connected: #" + data.id + " - " + data.name); 
+  turtlesList[data.id] = new Turtle(data);
 
   updateTurtles();
 });
 
-socket.on("turtle disconnected", function(data) {
-  outputLog("Turtle disconnected: " + data.name); 
-  delete turtlesList[data.name];
+socket.on("turtle disconnected", function(id) {
+  outputLog("Turtle disconnected: " + id); 
+  delete turtlesList[id];
   updateTurtles();
 });
 
-socket.on("entities", function(data) {
-  if(turtleList[data.name]) {
-    turtleList[data.name].updateData("entities", data.entities);
-  }
-
-  updateTurtles();
-});
-
-socket.on("infos", function(data) {
-  if(turtleList[data.name]) {
-    turtleList[data.name].updateData("infos", data.infos);
+socket.on("turtle update", function(data) {
+  if(turtlesList[data.id]) {
+    turtlesList[data.id].updateData(data);
   }
 
   updateTurtles();
@@ -107,18 +104,9 @@ socket.on("infos", function(data) {
 
 
 var Turtle = function(data) {
-  this.data = {
-    name: data.name || "No name",
-    infos: {
-      pos: {
-        x: 0,
-        y: 0,
-        z: 0
-      }
-    }
-  };
+  this.data = data;
   this.buildDom();
-}
+};
 
 Turtle.prototype = {
   buildDom: function() {
@@ -141,15 +129,16 @@ Turtle.prototype = {
 
   updateDom: function() {
     this._turtleName.innerHTML = this.data.name;
-    this._turtlePos.innerHTML = "X: " + this.data.infos.pos.x + " - Y: " + this.data.infos.pos.y + " - Y: " + this.data.infos.pos.z;
+    this._turtlePos.innerHTML = "X: " + this.data.location.x + " ; Y: " + this.data.location.y + " ; Y: " + this.data.location.z;
   },
 
-  updateData: function(key, value) {
-    this.data[key] = value;
+  updateData: function(data) {
+    this.data = data;
+    this.updateDom();
   },
 
   _click: function() {
-    selectedTurtle = this.data.name;
+    selectedTurtle = this.data.id;
     updateTurtles();
   }
-}
+};
