@@ -1,0 +1,88 @@
+@import "settings";
+@import "foundation";
+
+#log {
+  background-color: #37474f;
+  color: #eceff1;
+
+  h2 {
+    color: inherit;
+  }
+
+  .content {
+    font-family: monospace;
+    word-break: break-all;
+
+    .line {
+      padding: 4px 16px;
+      margin: 0 -16px;
+      border-top: solid 1px #455a64;
+
+      &:hover {
+        background-color: #455a64;
+      }
+    }
+  }
+}
+
+#map {
+  height: 637px;
+  background-color: #EEE;
+  position: relative;
+
+  .map-turtle {
+    background-color: #444;
+    position: absolute;
+  }
+}
+
+#turtles ul {
+  margin: 0;
+
+  .turtle {
+    padding: 16px;
+    position: relative;
+    transition: .2s ease-in-out;
+    list-style: none;
+
+    &:hover {
+      background-color: #DDD;
+    }
+
+    &:before {
+      background-color: #CCC;
+      content: " ";
+      width: 100%;
+      height: 1px;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: block;
+      position: absolute;
+    }
+
+    &.selected {
+      border-right: 4px solid #5677fc;
+    }
+
+    .turtle-name {
+      font-size: 16px;
+    }
+
+    .turtle-pos {
+      font-size: 14px;
+      color: #AAA;
+    }
+  }
+}
+
+pre code {
+  display: block;
+  padding: 12px;
+  border: solid 1px #CCC;
+  background-color: #FFF;
+  margin: 8px 0;
+  color: #444;
+  font-weight: normal;
+  line-height: 20px;
+}

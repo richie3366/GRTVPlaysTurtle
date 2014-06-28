@@ -1,3 +1,5 @@
+$(document).foundation();
+
 "use strict";
 
 var commandInput = document.querySelector("#turtle-command"),
@@ -10,15 +12,14 @@ var commandInput = document.querySelector("#turtle-command"),
     map = document.querySelector("#map"),
     selectedTurtle = "",
     socket = io.connect("/control", {
-      host: "sandhose.fr",
       port: 4321
     });
 
 var mapBoundaries = {
-  minX: -630,
-  maxX: -400,
+  minX: 200,
+  maxX: 300,
   minZ: 200,
-  maxZ: 430
+  maxZ: 300
 };
 
 function sendCommand(command) {
@@ -52,8 +53,8 @@ function updateTurtles() {
 
   turtleView.querySelector("h2").innerHTML = turtlesList[selectedTurtle] ? turtlesList[selectedTurtle].data.name : "No Turtle selected";
 
-  var d = "";
-  if(turtlesList[selectedTurtle]) { d = JSON.stringify(turtlesList[selectedTurtle].data, null, "  "); }
+  var d = "No Turtle selected";
+  if(turtlesList[selectedTurtle]) { d =  hljs.highlight("json", JSON.stringify(turtlesList[selectedTurtle].data, null, "  ")).value; }
   turtleView.querySelector(".content").innerHTML = d;
   updateMap();
 }
@@ -63,7 +64,6 @@ function updateMap() {
   var mapRect = map.getBoundingClientRect();
   var elWidth = mapRect.width / (mapBoundaries.maxX - mapBoundaries.minX);
   var elHeight = mapRect.height / (mapBoundaries.maxZ - mapBoundaries.minZ);
-  debugger;
   for(var i in turtlesList) {
     var e = document.createElement("div");
     e.className = "map-turtle";
@@ -106,14 +106,16 @@ socket.on("turtles list", function(data) {
 socket.on("command list", function(data) {
   outputLog("Available commands: " + JSON.stringify(data) ); 
   for(var i in data) {
+    var li = document.createElement("li");
     var e = document.createElement("button");
-    e.className = "instant-command-button button";
+    e.className = "instant-command-button button tiny";
     e.innerHTML = data[i];
     e.dataset.command = data[i];
     e.addEventListener("click", function() {
       sendCommand(e.dataset.command);
     }, false);
-    instantCommand.appendChild(e);
+    li.appendChild(e);
+    instantCommand.appendChild(li);
   }
 });
 
@@ -146,7 +148,7 @@ var Turtle = function(data) {
 
 Turtle.prototype = {
   buildDom: function() {
-    this.elem = document.createElement("div");
+    this.elem = document.createElement("li");
     this.elem.className = "turtle";
 
     this.elem.addEventListener("click", this._click.bind(this));
@@ -165,7 +167,7 @@ Turtle.prototype = {
 
   updateDom: function() {
     this._turtleName.innerHTML = this.data.name;
-    this._turtlePos.innerHTML = "X: " + this.data.location.x + " ; Y: " + this.data.location.y + " ; Y: " + this.data.location.z;
+    this._turtlePos.innerHTML = "X: " + this.data.location.x + " ; Y: " + this.data.location.y + " ; Z: " + this.data.location.z;
   },
 
   updateData: function(data) {
