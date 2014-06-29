@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation</title>
+    <title>GRTV plays Turtle</title>
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/github.min.css">
     <script src="js/highlight.pack.js"></script>
@@ -14,7 +14,9 @@
     <div class="row">
       <div class="large-8 large-centered columns">
         <h1>GRTV plays Turtle</h1>
-        <div id="map" class="panel"></div>
+        <div class="panel">
+          <div id="map"></div>
+        </div>
       </div>
     </div>
 
@@ -22,7 +24,6 @@
       <div class="large-6 columns">
         <div id="turtle-view" class="panel">
           <h2>No Turtle selected</h2>
-          <pre><code><div class="code-container content"></div></code></pre>
           <div class="card-footer row collapse">
             <div class="small-9 columns">
               <input id="turtle-command" type="text" placeholder="Command" />
@@ -32,6 +33,7 @@
             </div>
           </div>
           <div id="instant-commands" class="button-group"></div>
+          <pre><code><div class="code-container content"></div></code></pre>
         </div>
       </div>
     

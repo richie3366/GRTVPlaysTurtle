@@ -26,12 +26,19 @@
 }
 
 #map {
-  height: 637px;
+  height: 600px;
+  width: 600px;
   background-color: #EEE;
   position: relative;
+  background: url("../img/map.png");
 
   .map-turtle {
     background-color: #444;
+    position: absolute;
+  }
+
+  .map-entity {
+    background-color: #CCC;
     position: absolute;
   }
 }
@@ -78,6 +85,7 @@
 
 pre code {
   display: block;
+  font-size: 12px;
   padding: 12px;
   border: solid 1px #CCC;
   background-color: #FFF;

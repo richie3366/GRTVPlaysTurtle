@@ -1,6 +1,7 @@
+"use strict";
+
 $(document).foundation();
 
-"use strict";
 
 var commandInput = document.querySelector("#turtle-command"),
     sendCommandButton = document.querySelector("#send-command"),
@@ -24,6 +25,7 @@ var mapBoundaries = {
 
 function sendCommand(command) {
   if(socket.socket.connected) {
+    console.log(selectedTurtle, command);
     socket.emit("command", {
       command: command,
       id: selectedTurtle
@@ -69,9 +71,22 @@ function updateMap() {
     e.className = "map-turtle";
     e.style.width = elWidth + "px";
     e.style.height = elHeight + "px";
-    e.style.top = (turtlesList[i].data.location.z - mapBoundaries.minZ) * elHeight + "px";
-    e.style.left = (turtlesList[i].data.location.x - mapBoundaries.minX) * elWidth + "px";
+    e.style.top = (turtlesList[i].data.location.Z - mapBoundaries.minZ) * elHeight + "px";
+    e.style.left = (turtlesList[i].data.location.X - mapBoundaries.minX) * elWidth + "px";
     map.appendChild(e);
+
+    if(turtlesList[i].data.data.hasOwnProperty("entities")) {
+      for(var j in turtlesList[i].data.data.entities) {
+        var ent = turtlesList[i].data.data.entities[j];
+        var entElem = document.createElement("div");
+        entElem.className = "map-entity";
+        entElem.style.width = elWidth + "px";
+        entElem.style.height = elHeight + "px";
+        entElem.style.top = (ent.position.z - mapBoundaries.minZ) * elHeight + "px";
+        entElem.style.left = (ent.position.x - mapBoundaries.minX) * elWidth + "px";
+        map.appendChild(entElem);
+      }
+    }
   }
 }
 
@@ -91,7 +106,7 @@ socket.on("error", function(data) {
 });
 
 socket.on("command", function(data) {
-  outputLog("[" + data.turtle + "] " + data.command); 
+  outputLog("[" + turtlesList[data.turtleId].data.name + "] " + data.command); 
 });
 
 socket.on("turtles list", function(data) {
@@ -111,9 +126,7 @@ socket.on("command list", function(data) {
     e.className = "instant-command-button button tiny";
     e.innerHTML = data[i];
     e.dataset.command = data[i];
-    e.addEventListener("click", function() {
-      sendCommand(e.dataset.command);
-    }, false);
+    e.addEventListener("click", sendCommand.bind(null, e.dataset.command));
     li.appendChild(e);
     instantCommand.appendChild(li);
   }
@@ -167,7 +180,7 @@ Turtle.prototype = {
 
   updateDom: function() {
     this._turtleName.innerHTML = this.data.name;
-    this._turtlePos.innerHTML = "X: " + this.data.location.x + " ; Y: " + this.data.location.y + " ; Z: " + this.data.location.z;
+    this._turtlePos.innerHTML = "X: " + this.data.location.X + " ; Y: " + this.data.location.Y + " ; Z: " + this.data.location.Z;
   },
 
   updateData: function(data) {
