@@ -43,10 +43,14 @@
   }
 }
 
-#turtles ul {
+#instant-commands .button {
+  margin: 1px;
+}
+
+#turtles ul, #entities ul {
   margin: 0;
 
-  .turtle {
+  .turtle, .entity {
     padding: 16px;
     position: relative;
     transition: .2s ease-in-out;
@@ -68,15 +72,23 @@
       position: absolute;
     }
 
+    &:active {
+      background-color: transparent;
+      transition: 0s;
+    }
+
     &.selected {
       border-right: 4px solid #5677fc;
     }
 
-    .turtle-name {
+    .turtle-name, .entity-name {
       font-size: 16px;
+      .turtle-id, .entity-id {
+        color: #AAA;
+      }
     }
 
-    .turtle-pos {
+    .turtle-pos, .entity-pos {
       font-size: 14px;
       color: #AAA;
     }
@@ -93,4 +105,7 @@ pre code {
   color: #444;
   font-weight: normal;
   line-height: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
 }
