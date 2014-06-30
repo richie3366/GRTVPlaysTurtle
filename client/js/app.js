@@ -6,4 +6,4 @@
 
 $(document).foundation();
 
-var app = angular.module("GRTVPlaysTurtle", []);
+var app = angular.module("GRTVPlaysTurtle", ["ngAnimate"]);

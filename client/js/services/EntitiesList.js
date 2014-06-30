@@ -16,6 +16,7 @@ app.factory("EntitiesList", ["$rootScope", function($rootScope, Turtle) {
       $rootScope.$emit("entities update");
     },
     get: function() {
+      if(Object.keys(entities).length === 0) return false;
       return entities;
     },
     isSelected: function(id) {

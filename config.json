@@ -2,5 +2,14 @@
   "port": 4321,
   "turtle key": "secret",
   "encryption key": "secret",
-  "commands": ["turnLeft", "turnRight", "forward", "back", "up", "down", "attack", "swap"]
+  "commands": {
+    "turnLeft": "Left",
+    "turnRight": "Right",
+    "forward": "Forward",
+    "back": "Backward",
+    "up": "Up",
+    "down": "Down",
+    "attack": "Attack",
+    "swap": "Swap"
+  }
 }

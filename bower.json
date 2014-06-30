@@ -4,6 +4,8 @@
     "foundation": "zurb/bower-foundation",
     "angular": "~1.2.18",
     "angular-route": "~1.2.18",
-    "angular-sanitize": "~1.2.18"
+    "angular-sanitize": "~1.2.18",
+    "moment": "~2.7.0",
+    "angular-animate": "~1.2.18"
   }
 }

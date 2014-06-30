@@ -9,17 +9,46 @@
     color: inherit;
   }
 
+  .clear-button {
+    @include button($button-med, #455a64, 0, false, false, false);
+    margin-bottom: 0;
+  }
+
   .content {
     font-family: monospace;
     word-break: break-all;
+
+    height: 300px;
+    width: 100%;
+    overflow-y: auto;
 
     .line {
       padding: 4px 16px;
       margin: 0 -16px;
       border-top: solid 1px #455a64;
+      width: 100%;
+      color: #607d8b;
+      opacity: 1;
 
       &:hover {
         background-color: #455a64;
+      }
+
+      .date {
+        color: #90a4ae;
+      }
+
+      &.first, &:hover {
+        color: #eceff1;
+      }
+
+      transition:all ease-in-out 0.25s;
+      
+      &.ng-enter {
+        opacity: 0;
+      }
+      &.ng-enter-active {
+        opacity: 1;
       }
     }
   }

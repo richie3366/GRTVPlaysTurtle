@@ -26,15 +26,16 @@
     </div>
 
     <div class="row">
-      <div class="large-6 columns">
+      <div class="large-4 columns">
         <div id="turtles" class="panel clearfix" ng-controller="TurtlesListCtrl as turtles">
           <button ng-click="turtles.select(null)" class="button secondary small right">Deselect</button>
           <h2>Turtle List</h2>
           <ul class="content">
             <li ng-repeat="turtle in turtles.list" class="turtle" ng-click="turtles.select(turtle.id)" ng-class="{ selected: turtles.isSelected(turtle) }">
               <div class="turtle-name"><span class="turtle-id">#{{ turtle.id }}</span> {{ turtle.name }}</div>
-              <div class="turtle-pos">X: {{ turtle.location.X | number:1 }}; Y: {{ turtle.location.Y | number:1 }}; Z: {{ turtle.location.Z | number:1 }}</div>
+              <div class="turtle-pos">X: {{ turtle.location.X | number:1 }}; Y: {{ turtle.location.Y | number:1 }}; Z: {{ turtle.location.Z | number:1 }}<span ng-if="turtle.location.dir">; Dir: {{ turtle.location.dir }}</span></div>
             </li>
+            <li ng-hide="turtles.list" class="turtle"><div class="turtle-name">No Turtle connected</div></li>
           </ul>
         </div>
         
@@ -46,16 +47,13 @@
               <div class="entity-name"><span class="entity-id">{{ entity.type }}</span> {{ id }}</div>
               <div class="entity-pos">X: {{ entity.position.x | number:1 }}; Y: {{ entity.position.y | number:1 }}; Z: {{ entity.position.z | number:1 }}</div>
             </li>
+            <li ng-hide="entities.list" class="entity"><div class="entity-name">No Entity detected</div></li>
           </ul>
         </div>
 
-        <!-- <div id="log" class="panel" ng-controller="LogCtrl as log">
-          <h2>Output log</h2>
-          <div class="content"></div>
-        </div> -->
       </div>
     
-      <div class="large-6 columns">
+      <div class="large-4 columns">
         <div id="turtle-view" class="panel" ng-controller="TurtleCtrl" ng-show="turtle">
           <h2>{{ turtle.name }}</h2>
           <div class="card-footer row collapse">
@@ -67,7 +65,7 @@
             </div>
           </div>
           <div id="instant-commands" class="button-group">
-            <button class="button tiny" ng-repeat="command in commands" ng-click="sendCommand(turtle, command)">{{ command }}</button>
+            <button class="button tiny" ng-repeat="(command, displayCmd) in commands" ng-click="sendCommand(turtle, command)">{{ displayCmd }}</button>
           </div>
           <pre><code><div class="code-container content" ng-bind-html="turtle.data|prettyJSON"></div></code></pre>
         </div>
@@ -77,11 +75,42 @@
           <pre><code><div class="code-container content" ng-bind-html="entity|prettyJSON"></div></code></pre>
         </div>
       </div>
+      
+
+      <div class="large-4 columns">
+        <div id="stats" class="panel" ng-controller="StatsCtrl as stats">
+          <h2>Statistiques</h2>
+          <ul class="content">
+            <li>
+                <ng-pluralize count="stats.connected"
+                 when="{'0': 'Aucun client connecté',
+                     'one': '1 client connecté',
+                     'other': '{} clients connectés'}">
+                </ng-pluralize>
+            </li>
+            <li>
+              <ng-pluralize count="stats.commands"
+                 when="{'0': 'Aucun commande envoyée',
+                     'one': '1 commande envoyée',
+                     'other': '{} commandes envoyées'}">
+                </ng-pluralize>
+            </li>
+          </ul>
+        </div>
+        <div id="log" class="panel" ng-controller="LogCtrl as log">
+          <button ng-click="log.clear()" class="clear-button right">Clear</button>
+          <h2>Output log</h2>
+          <div class="content clearfix" ng-hide="log.lines.length == 0">
+            <div class="line" ng-repeat="line in log.lines" ng-class="{ first: $first }"><span class="date">{{ line.date | formatDate }}</span> {{ line.message }}</div>
+          </div>
+        </div>
+      </div>
     </div>
 
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/TurtlesListCtrl.js"></script>
@@ -90,11 +119,13 @@
     <script src="js/controllers/EntityCtrl.js"></script>
     <script src="js/controllers/MapCtrl.js"></script>
     <script src="js/controllers/LogCtrl.js"></script>
+    <script src="js/controllers/StatsCtrl.js"></script>
     <script src="js/controllers/AppCtrl.js"></script>
     <script src="js/services/socket.js"></script>
     <script src="js/services/Turtle.js"></script>
     <script src="js/services/TurtlesList.js"></script>
     <script src="js/services/EntitiesList.js"></script>
     <script src="js/filters/prettyJSON.js"></script>
+    <script src="js/filters/formatDate.js"></script>
   </body>
 </html>

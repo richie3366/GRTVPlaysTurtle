@@ -36,6 +36,7 @@ app.factory("TurtlesList", ["$rootScope", "Turtle", function($rootScope, Turtle)
       return turtlesList[id];
     },
     getList: function() {
+      if(Object.keys(turtlesList).length === 0) return false;
       return turtlesList;
     },
     getSelectedTurtle: function() {
