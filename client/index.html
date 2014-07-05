@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/github.min.css">
     <script src="js/highlight.pack.js"></script>
     <script src="bower_components/modernizr/modernizr.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script src="bower_components/socket.io-client/dist/socket.io.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
   </head>
@@ -54,8 +54,8 @@
       </div>
     
       <div class="large-4 columns">
-        <div id="turtle-view" class="panel" ng-controller="TurtleCtrl" ng-show="turtle">
-          <h2>{{ turtle.name }}</h2>
+        <div id="turtle-view" class="panel" ng-controller="TurtleCtrl as turtle" ng-show="turtle.turtle">
+          <h2>{{ turtle.turtle.name }}</h2>
           <div class="card-footer row collapse">
             <div class="small-9 columns">
               <input id="turtle-command" type="text" placeholder="Command" />
@@ -65,14 +65,14 @@
             </div>
           </div>
           <div id="instant-commands" class="button-group">
-            <button class="button tiny" ng-repeat="(command, displayCmd) in commands" ng-click="sendCommand(turtle, command)">{{ displayCmd }}</button>
+            <button class="button tiny" ng-repeat="(command, displayCmd) in commands" ng-click="turtle.sendCommand(turtle.turtle, command)">{{ displayCmd }}</button>
           </div>
-          <pre><code><div class="code-container content" ng-bind-html="turtle.data|prettyJSON"></div></code></pre>
+          <pre><code><div class="code-container content" ng-bind-html="turtle.turtle.data|prettyJSON"></div></code></pre>
         </div>
 
-        <div id="entity-view" class="panel" ng-controller="EntityCtrl" ng-show="entity">
+        <div id="entity-view" class="panel" ng-controller="EntityCtrl as ent" ng-show="ent.entity">
           <h2>{{ entity.type }}</h2>
-          <pre><code><div class="code-container content" ng-bind-html="entity|prettyJSON"></div></code></pre>
+          <pre><code><div class="code-container content" ng-bind-html="ent.entity|prettyJSON"></div></code></pre>
         </div>
       </div>
       
@@ -109,6 +109,7 @@
 
 
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>

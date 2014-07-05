@@ -7,14 +7,16 @@
 
 var app = angular.module("GRTVPlaysTurtle");
 
-app.controller("EntityCtrl", function($rootScope, $scope, EntitiesList, socket) {
+app.controller("EntityCtrl", function($rootScope, EntitiesList, socket) {
+  var self = this;
+
   $rootScope.$watch("selectedEntity", function() {
-    $scope.entity = EntitiesList.getSelectedEntity();
+    self.entity = EntitiesList.getSelectedEntity();
   });
 
   $rootScope.$on("entities update", function() {
-    $scope.entity = EntitiesList.getSelectedEntity();
+    self.entity = EntitiesList.getSelectedEntity();
   });
 
-  $scope.turtle = EntitiesList.getSelectedEntity();
+  this.entity = EntitiesList.getSelectedEntity();
 });

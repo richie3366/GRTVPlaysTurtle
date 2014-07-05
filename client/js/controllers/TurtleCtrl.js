@@ -7,14 +7,16 @@
 
 var app = angular.module("GRTVPlaysTurtle");
 
-app.controller("TurtleCtrl", function($rootScope, $scope, TurtlesList, socket) {
+app.controller("TurtleCtrl", function($rootScope, TurtlesList, socket) {
+  var self = this;
+
   $rootScope.$watch("selectedTurtle", function() {
-    $scope.turtle = TurtlesList.getSelectedTurtle();
+    self.turtle = TurtlesList.getSelectedTurtle();
   });
 
-  $scope.turtle = TurtlesList.getSelectedTurtle();
+  this.turtle = TurtlesList.getSelectedTurtle();
 
-  $scope.sendCommand = function(turtle, command) {
+  this.sendCommand = function(turtle, command) {
     socket.emit("command", { id: turtle.getId(), command: command });
   };
 });

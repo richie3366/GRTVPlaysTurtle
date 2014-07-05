@@ -8,7 +8,7 @@
 var app = angular.module("GRTVPlaysTurtle");
 
 app.controller("AppCtrl", function($rootScope, socket) {
-  $rootScope.commands = [];
+  $rootScope.commands = {};
   socket.on("command list", function(data) {
     $rootScope.commands = data;
   });

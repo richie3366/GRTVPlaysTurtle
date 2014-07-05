@@ -26,7 +26,7 @@ app.factory("EntitiesList", ["$rootScope", function($rootScope, Turtle) {
       $rootScope.selectedEntity = entities.hasOwnProperty(id) ? id : null;
     },
     getSelectedEntity: function() {
-      return entities[$rootScope.selectedEntity];
+      return entities[$rootScope.selectedEntity] || null;
     }
   };
 }]);

@@ -7,6 +7,6 @@
 
 var app = angular.module("GRTVPlaysTurtle");
 
-app.controller("MapCtrl", function($scope) {
+app.controller("MapCtrl", function() {
 
 });

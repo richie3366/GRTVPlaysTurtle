@@ -12,6 +12,7 @@ app.factory("TurtlesList", ["$rootScope", "Turtle", function($rootScope, Turtle)
 
   return {
     import: function(data) {
+      turtlesList = {};
       for(var i in data) {
         var newTurtle = new Turtle(data[i]);
         turtlesList[newTurtle.getId()] = newTurtle;
@@ -32,6 +33,11 @@ app.factory("TurtlesList", ["$rootScope", "Turtle", function($rootScope, Turtle)
       delete turtlesList[id];
       return;
     },
+    clear: function() {
+      turtlesList = {};
+      $rootScope.selectedTurtle = null;
+      return;
+    },
     getTurtle: function(id) {
       return turtlesList[id];
     },
@@ -40,9 +46,13 @@ app.factory("TurtlesList", ["$rootScope", "Turtle", function($rootScope, Turtle)
       return turtlesList;
     },
     getSelectedTurtle: function() {
-      return turtlesList[$rootScope.selectedTurtle];
+      return turtlesList[$rootScope.selectedTurtle] || false;
     },
     select: function(id) {
+      if(id instanceof Turtle) {
+        id = id.getId();
+      }
+
       $rootScope.selectedTurtle = turtlesList.hasOwnProperty(id) ? id : null;
     },
     isSelected: function(turtle) {

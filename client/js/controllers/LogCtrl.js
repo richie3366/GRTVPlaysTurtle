@@ -7,7 +7,7 @@
 
 var app = angular.module("GRTVPlaysTurtle");
 
-app.controller("LogCtrl", function($scope, TurtlesList, socket) {
+app.controller("LogCtrl", function(TurtlesList, socket) {
   var self = this;
 
   this.lines = [];
@@ -16,7 +16,7 @@ app.controller("LogCtrl", function($scope, TurtlesList, socket) {
     self.lines = [];
   };
 
-  $scope.logMessage = function(message) {
+  this.logMessage = function(message) {
     self.lines.unshift({
       date: Date.now(),
       message: message
@@ -24,8 +24,8 @@ app.controller("LogCtrl", function($scope, TurtlesList, socket) {
   }
   socket.on("command", function(data) {
     var t = TurtlesList.getTurtle(data.turtleId);
-    $scope.logMessage("[" + (t ? t.getName() : "#" + data.turtleId) + "] Command: " + data.command);
+    self.logMessage("[" + (t ? t.getName() : "#" + data.turtleId) + "] Command: " + data.command);
   });
 
-  $scope.logMessage("Connected");
+  this.logMessage("Connected");
 });

@@ -10,6 +10,8 @@ var app = angular.module("GRTVPlaysTurtle");
 app.controller("EntitiesListCtrl", function(socket, EntitiesList) {
   var self = this;
 
+  this.list = {};
+
   socket.on("entities", function(data) {
     EntitiesList.update(data);
     self.list = EntitiesList.get();

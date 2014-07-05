@@ -4,6 +4,6 @@
 
 "use strict";
 
-$(document).foundation();
+// $(document).foundation();
 
-var app = angular.module("GRTVPlaysTurtle", ["ngAnimate"]);
+var app = angular.module("GRTVPlaysTurtle", ["ngAnimate", "btford.socket-io"]);

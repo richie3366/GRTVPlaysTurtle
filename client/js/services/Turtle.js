@@ -25,7 +25,8 @@ app.factory("Turtle", function() {
 
     getId: function() { return this.id; },
     getName: function() { return this.name; },
-    getLocation: function() { return this.location; }
+    getLocation: function() { return this.location; },
+    getData: function() { return this.data; }
   }
 
   return Turtle;

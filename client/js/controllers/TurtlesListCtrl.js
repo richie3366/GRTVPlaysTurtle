@@ -10,6 +10,8 @@ var app = angular.module("GRTVPlaysTurtle");
 app.controller("TurtlesListCtrl", function(socket, TurtlesList) {
   var self = this;
 
+  this.list = {};
+
   socket.on("turtles list", function(data) {
     TurtlesList.import(data);
     self.list = TurtlesList.getList();
