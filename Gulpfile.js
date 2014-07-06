@@ -88,7 +88,7 @@ gulp.task("useref", ["sass"], function() {
     .pipe(css)
       .pipe(uncss({
         html: ["client/index.html"],
-        ignore: [/\.selected/]
+        ignore: [/\.selected/, /\.first/]
       }))
       .pipe(autoprefixer())
       .pipe(cssMin())

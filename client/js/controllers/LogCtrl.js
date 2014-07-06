@@ -21,6 +21,7 @@ app.controller("LogCtrl", ["TurtlesList", "socket", function(TurtlesList, socket
       date: Date.now(),
       message: message
     });
+    self.lines = self.lines.slice(0, 14);
   };
 
   socket.on("command", function(data) {
