@@ -2,9 +2,9 @@
  * GRTVPlaysTurtle -> Client -> Services -> Turtle
  */
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
 app.factory("Turtle", function() {
   var Turtle = function(data) {
@@ -27,7 +27,7 @@ app.factory("Turtle", function() {
     getName: function() { return this.name; },
     getLocation: function() { return this.location; },
     getData: function() { return this.data; }
-  }
+  };
 
   return Turtle;
 });

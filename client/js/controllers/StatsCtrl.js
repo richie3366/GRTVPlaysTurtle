@@ -3,11 +3,11 @@
  */
 
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
-app.controller("StatsCtrl", function(socket) {
+app.controller("StatsCtrl", ["socket", function(socket) {
   var self = this;
   this.connected = null;
   this.commands = null;
@@ -16,4 +16,4 @@ app.controller("StatsCtrl", function(socket) {
     self.connected = data.connected;
     self.commands = data.commands;
   });
-});
+}]);

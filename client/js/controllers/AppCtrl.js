@@ -3,13 +3,13 @@
  */
 
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
-app.controller("AppCtrl", function($rootScope, socket) {
+app.controller("AppCtrl", ["$rootScope", "socket", function($rootScope, socket) {
   $rootScope.commands = {};
   socket.on("command list", function(data) {
     $rootScope.commands = data;
   });
-});
+}]);

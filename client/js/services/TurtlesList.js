@@ -2,9 +2,9 @@
  * GRTVPlaysTurtle -> Client -> Services -> TurtlesList
  */
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
 app.factory("TurtlesList", ["$rootScope", "Turtle", function($rootScope, Turtle) {
   var turtlesList = {};

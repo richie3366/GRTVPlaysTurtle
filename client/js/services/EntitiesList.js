@@ -2,11 +2,11 @@
  * GRTVPlaysTurtle -> Client -> Services -> EntitiesList
  */
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
-app.factory("EntitiesList", ["$rootScope", function($rootScope, Turtle) {
+app.factory("EntitiesList", ["$rootScope", function($rootScope) {
   var entities = {};
   $rootScope.selectedEntity = null;
 

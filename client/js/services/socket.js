@@ -2,9 +2,9 @@
  * GRTVPlaysTurtle -> Client -> Services -> Socket
  */
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
 app.factory("socket", ["socketFactory", function(socketFactory) {
   if(!window.io) {

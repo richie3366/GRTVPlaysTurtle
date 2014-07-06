@@ -3,9 +3,9 @@
  */
 
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
 app.controller("MapCtrl", function() {
 

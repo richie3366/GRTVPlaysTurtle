@@ -3,11 +3,11 @@
  */
 
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
-app.controller("LogCtrl", function(TurtlesList, socket) {
+app.controller("LogCtrl", ["TurtlesList", "socket", function(TurtlesList, socket) {
   var self = this;
 
   this.lines = [];
@@ -21,11 +21,12 @@ app.controller("LogCtrl", function(TurtlesList, socket) {
       date: Date.now(),
       message: message
     });
-  }
+  };
+
   socket.on("command", function(data) {
     var t = TurtlesList.getTurtle(data.turtleId);
     self.logMessage("[" + (t ? t.getName() : "#" + data.turtleId) + "] Command: " + data.command);
   });
 
   this.logMessage("Connected");
-});
+}]);

@@ -6,4 +6,4 @@
 
 // $(document).foundation();
 
-var app = angular.module("GRTVPlaysTurtle", ["ngAnimate", "btford.socket-io"]);
+window.app = angular.module("GRTVPlaysTurtle", ["ngAnimate", "btford.socket-io"]);

@@ -3,11 +3,11 @@
  */
 
 
-"use strict";
+"use strict"; // <STRIP>
 
-var app = angular.module("GRTVPlaysTurtle");
+var app = angular.module("GRTVPlaysTurtle"); // <STRIP>
 
-app.controller("TurtleCtrl", function($rootScope, TurtlesList, socket) {
+app.controller("TurtleCtrl", ["$rootScope", "TurtlesList", "socket", function($rootScope, TurtlesList, socket) {
   var self = this;
 
   $rootScope.$watch("selectedTurtle", function() {
@@ -19,4 +19,4 @@ app.controller("TurtleCtrl", function($rootScope, TurtlesList, socket) {
   this.sendCommand = function(turtle, command) {
     socket.emit("command", { id: turtle.getId(), command: command });
   };
-});
+}]);

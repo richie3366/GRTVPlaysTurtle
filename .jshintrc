@@ -1,0 +1,24 @@
+{
+  "boss": true,
+  "browser": true,
+  "camelcase": true,
+  "eqeqeq": true,
+  "indent": 2,
+  "esnext": true,
+  "globals": {
+    "angular": true,
+    "hljs": true,
+    "io": true
+  },
+  "jquery": true,
+  "smarttabs": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "newcap": true,
+  "quotmark": "double",
+  "notypeof": true,
+  "devel": true,
+  "loopfunc": true,
+  "globalstrict": true
+}
