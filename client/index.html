@@ -9,6 +9,12 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/github.min.css" async>
 
+    <style>
+      [ng-cloak] {
+        display: none !important;
+      }
+    </style>
+
 
     <!-- Pas besoin
     <script src="bower_components/modernizr/modernizr.js"></script>
@@ -35,7 +41,7 @@
           <button ng-click="turtles.select(null)" class="button secondary small right">Deselect</button>
           <h2>Turtle List</h2>
           <ul class="content">
-            <li ng-repeat="turtle in turtles.list" class="turtle" ng-click="turtles.select(turtle.id)" ng-class="{ selected: turtles.isSelected(turtle) }">
+            <li ng-repeat="turtle in turtles.list" class="turtle" ng-click="turtles.select(turtle.id)" ng-class="{ selected: turtles.isSelected(turtle) }" ng-cloak>
               <div class="turtle-name"><span class="turtle-id">#{{ turtle.id }}</span> {{ turtle.name }}</div>
               <div class="turtle-pos">X: {{ turtle.location.X | number:1 }}; Y: {{ turtle.location.Y | number:1 }}; Z: {{ turtle.location.Z | number:1 }}<span ng-if="turtle.location.dir">; Dir: {{ turtle.location.dir }}</span></div>
             </li>
@@ -47,7 +53,7 @@
           <button ng-click="entities.select(null)" class="button secondary small right">Deselect</button>
           <h2>Entities</h2>
           <ul class="content">
-            <li ng-repeat="(id, entity) in entities.list" class="entity" ng-click="entities.select(id)" ng-class="{ selected: entities.isSelected(id) }">
+            <li ng-repeat="(id, entity) in entities.list" class="entity" ng-click="entities.select(id)" ng-class="{ selected: entities.isSelected(id) }" ng-cloak>
               <div class="entity-name"><span class="entity-id">{{ entity.type }}</span> {{ id }}</div>
               <div class="entity-pos">X: {{ entity.position.x | number:1 }}; Y: {{ entity.position.y | number:1 }}; Z: {{ entity.position.z | number:1 }}</div>
             </li>
@@ -58,7 +64,7 @@
       </div>
     
       <div class="large-4 columns">
-        <div id="turtle-view" class="panel" ng-controller="TurtleCtrl as turtle" ng-show="turtle.turtle">
+        <div id="turtle-view" class="panel" ng-controller="TurtleCtrl as turtle" ng-show="turtle.turtle" ng-cloak>
           <h2>{{ turtle.turtle.name }}</h2>
           <div class="card-footer row collapse">
             <div class="small-9 columns">
@@ -74,7 +80,7 @@
           <pre><code><div class="code-container content" ng-bind-html="turtle.turtle.data|prettyJSON"></div></code></pre>
         </div>
 
-        <div id="entity-view" class="panel" ng-controller="EntityCtrl as ent" ng-show="ent.entity">
+        <div id="entity-view" class="panel" ng-controller="EntityCtrl as ent" ng-show="ent.entity" ng-cloak>
           <h2>{{ entity.type }}</h2>
           <pre><code><div class="code-container content" ng-bind-html="ent.entity|prettyJSON"></div></code></pre>
         </div>
@@ -87,20 +93,22 @@
           <ul class="content">
             <li>
                 <ng-pluralize count="stats.connected"
-                 when="{'0': 'Aucun client connecté', 'one': '1 client connecté', 'other': '{} clients connectés'}">
+                  when="{'0': 'Aucun client connecté', 'one': '1 client connecté', 'other': '{} clients connectés'}">
+                  Loading...
                 </ng-pluralize>
             </li>
             <li>
               <ng-pluralize count="stats.commands"
-                 when="{'0': 'Aucun commande envoyée', 'one': '1 commande envoyée', 'other': '{} commandes envoyées'}">
-                </ng-pluralize>
+                when="{'0': 'Aucun commande envoyée', 'one': '1 commande envoyée', 'other': '{} commandes envoyées'}">
+                Loading...
+              </ng-pluralize>
             </li>
           </ul>
         </div>
         <div id="log" class="panel" ng-controller="LogCtrl as log">
           <button ng-click="log.clear()" class="clear-button right">Clear</button>
           <h2>Output log</h2>
-          <div class="content clearfix" ng-hide="log.lines.length == 0">
+          <div class="content clearfix" ng-hide="log.lines.length == 0" ng-cloak>
             <div class="line" ng-repeat="line in log.lines" ng-class="{ first: $first }"><span class="date">{{ line.date | formatDate }}</span> {{ line.message }}</div>
           </div>
         </div>
