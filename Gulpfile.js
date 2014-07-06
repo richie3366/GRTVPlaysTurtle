@@ -11,7 +11,8 @@ var gulp = require("gulp"),
     filter = require("gulp-filter"),
     strip = require("gulp-strip-line"),
     plumber = require("gulp-plumber"),
-    htmlmin = require("gulp-htmlmin");
+    htmlmin = require("gulp-htmlmin"),
+    uncss = require("gulp-uncss");
 
 gulp.task("clean", function() {
   return gulp.src(["dist/", "coverage/", "client/css/"], { read: false })
@@ -85,6 +86,10 @@ gulp.task("useref", ["sass"], function() {
       .pipe(uglify())
     .pipe(vendors.restore())
     .pipe(css)
+      .pipe(uncss({
+        html: ["client/index.html"],
+        ignore: [/\.selected/]
+      }))
       .pipe(autoprefixer())
       .pipe(cssMin())
     .pipe(css.restore())
