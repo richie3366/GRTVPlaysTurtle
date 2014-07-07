@@ -16,7 +16,7 @@
   // "foundation/components/inline-lists",
   // "foundation/components/joyride",
   // "foundation/components/keystrokes",
-  // "foundation/components/labels",
+  "foundation/components/labels",
   // "foundation/components/magellan",
   // "foundation/components/orbit",
   // "foundation/components/pagination",
@@ -47,8 +47,12 @@
   }
 
   .clear-button {
-    @include button($button-med, #455a64, 0, false, false, false);
+    @include button($button-tny, #455a64, 0, false, false, false);
     margin-bottom: 0;
+  }
+
+  .header {
+    margin-bottom: 8px;
   }
 
   .content {
@@ -61,8 +65,7 @@
     position: relative;
 
     .line {
-      padding: 4px 16px;
-      margin: 0 -16px;
+      padding: 4px 0px 4px 4px;
       border-top: solid 1px #455a64;
       width: 100%;
       color: #607d8b;
@@ -87,6 +90,15 @@
       }
       &.ng-enter-active {
         opacity: 1;
+      }
+
+      .count-label {
+        @include label(
+          $bg: #455a64,
+          $padding: 3px 8px
+        );
+        margin: -4px 0;
+        line-height: 15px;
       }
     }
 

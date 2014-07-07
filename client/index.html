@@ -106,10 +106,12 @@
           </ul>
         </div>
         <div id="log" class="panel" ng-controller="LogCtrl as log">
-          <button ng-click="log.clear()" class="clear-button right">Clear</button>
-          <h2>Output log</h2>
-          <div class="content clearfix" ng-hide="log.lines.length == 0" ng-cloak>
-            <div class="line" ng-repeat="line in log.lines" ng-class="{ first: $first }"><span class="date">{{ line.date | formatDate }}</span> {{ line.message }}</div>
+          <div class="header">
+            <button ng-click="log.clear()" class="clear-button right">Clear</button>
+            <h2>Output log</h2>
+          </div>
+          <div class="content clearfix" ng-cloak>
+            <div class="line" ng-repeat="line in log.lines" ng-class="{ first: $first }"><span class="date">{{ line.date | formatDate }}</span> {{ line.message }} <span class="count-label right" ng-show="line.count > 1">{{ line.count }}</span></div>
           </div>
         </div>
       </div>

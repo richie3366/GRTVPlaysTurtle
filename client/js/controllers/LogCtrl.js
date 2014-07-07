@@ -17,10 +17,17 @@ app.controller("LogCtrl", ["TurtlesList", "socket", function(TurtlesList, socket
   };
 
   this.logMessage = function(message) {
-    self.lines.unshift({
-      date: Date.now(),
-      message: message
-    });
+    if(self.lines[0] && message === self.lines[0].message) {
+      self.lines[0].count++;
+      self.lines[0].date = Date.now();
+    }
+    else {
+      self.lines.unshift({
+        date: Date.now(),
+        message: message,
+        count: 1
+      });  
+    }
     self.lines = self.lines.slice(0, 14);
   };
 
