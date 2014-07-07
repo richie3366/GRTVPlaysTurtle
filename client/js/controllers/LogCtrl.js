@@ -36,5 +36,17 @@ app.controller("LogCtrl", ["TurtlesList", "socket", function(TurtlesList, socket
     self.logMessage("[" + (t ? t.getName() : "#" + data.turtleId) + "] Command: " + data.command);
   });
 
-  this.logMessage("Connected");
+  socket.on("error", function(data) {
+    console.log(data);
+    if(data === "command too fast") {
+      self.logMessage("Please wait 5sec between commands");
+    }
+  });
+
+  socket.on("connect", function() {
+    self.logMessage("Connected");
+  });
+  socket.on("disconnect", function() {
+    self.logMessage("Disconnected");
+  });
 }]);

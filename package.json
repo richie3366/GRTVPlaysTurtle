@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/richie3366/GRTVPlaysTurtle",
   "dependencies": {
+    "chalk": "^0.5.0",
     "compression": "^1.0.8",
     "express": "^4.5.0",
+    "redis": "^0.10.3",
     "socket.io": "^0.9.17"
   },
   "devDependencies": {

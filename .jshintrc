@@ -20,5 +20,6 @@
   "notypeof": true,
   "devel": true,
   "loopfunc": true,
-  "globalstrict": true
+  "globalstrict": true,
+  "node": true
 }

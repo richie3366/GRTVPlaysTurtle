@@ -11,5 +11,7 @@
     "down": "Down",
     "attack": "Attack",
     "swap": "Swap"
-  }
+  },
+  "slow": 5,
+  "workerCount": "CPU count"
 }
