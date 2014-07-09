@@ -9,11 +9,7 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/github.min.css" async>
 
-    <style>
-      [ng-cloak] {
-        display: none !important;
-      }
-    </style>
+    <style>[ng-cloak]{display:none!important;}</style>
 
 
     <!-- Pas besoin
@@ -38,7 +34,7 @@
     <div class="row">
       <div class="large-4 columns">
         <div id="turtles" class="panel clearfix" ng-controller="TurtlesListCtrl as turtles">
-          <button ng-click="turtles.select(null)" class="button secondary small right">Deselect</button>
+          <button ng-click="turtles.select(null)" class="button secondary tiny right">Deselect</button>
           <h2>Turtle List</h2>
           <ul class="content">
             <li ng-repeat="turtle in turtles.list" class="turtle" ng-click="turtles.select(turtle.id)" ng-class="{ selected: turtles.isSelected(turtle) }" ng-cloak>
@@ -50,7 +46,7 @@
         </div>
         
         <div id="entities" class="panel clearfix" ng-controller="EntitiesListCtrl as entities">
-          <button ng-click="entities.select(null)" class="button secondary small right">Deselect</button>
+          <button ng-click="entities.select(null)" class="button secondary tiny right">Deselect</button>
           <h2>Entities</h2>
           <ul class="content">
             <li ng-repeat="(id, entity) in entities.list" class="entity" ng-click="entities.select(id)" ng-class="{ selected: entities.isSelected(id) }" ng-cloak>

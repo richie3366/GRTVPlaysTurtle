@@ -3,3 +3,4 @@ client/bower_components/
 client/css/app.css
 coverage/
 dist/
+logs/

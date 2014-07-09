@@ -21,8 +21,10 @@
     "chalk": "^0.5.0",
     "compression": "^1.0.8",
     "express": "^4.5.0",
+    "morgan": "^1.1.1",
     "redis": "^0.10.3",
-    "socket.io": "^0.9.17"
+    "socket.io": "^0.9.17",
+    "winston": "^0.7.3"
   },
   "devDependencies": {
     "gulp": "^3.8.5",
